@@ -1,13 +1,13 @@
-package bots;
+package ngen.bots;
 
-import db.LinkManager;
-import db.NodeManager;
-import db.model.Link;
-import db.model.Node;
-import exceptions.UriException;
+import ngen.db.LinkManager;
+import ngen.db.NodeManager;
+import ngen.db.model.Link;
+import ngen.db.model.Node;
+import ngen.exceptions.UriException;
 import org.bson.Document;
-import utils.UriUtils;
-import utils.handlers.HtmlHandler;
+import ngen.utils.UriUtils;
+import ngen.utils.handlers.HtmlHandler;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;

@@ -1,4 +1,4 @@
-package db;
+package ngen.db;
 
 /**
  * Created by Acesine on 11/14/15.

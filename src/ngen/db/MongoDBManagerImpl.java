@@ -1,4 +1,4 @@
-package db;
+package ngen.db;
 
 import com.mongodb.Block;
 import com.mongodb.MongoWriteException;

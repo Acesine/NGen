@@ -1,10 +1,10 @@
-package utils.handlers;
+package ngen.utils.handlers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import utils.UriUtils;
+import ngen.utils.UriUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;

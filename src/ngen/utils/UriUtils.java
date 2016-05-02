@@ -1,6 +1,6 @@
-package utils;
+package ngen.utils;
 
-import exceptions.UriException;
+import ngen.exceptions.UriException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 

@@ -1,4 +1,4 @@
-package exceptions;
+package ngen.exceptions;
 
 /**
  * Created by xianggao on 5/1/16.

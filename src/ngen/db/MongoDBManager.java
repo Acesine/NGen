@@ -1,4 +1,4 @@
-package db;
+package ngen.db;
 
 import org.bson.Document;
 

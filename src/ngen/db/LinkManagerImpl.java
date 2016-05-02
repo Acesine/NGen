@@ -1,6 +1,6 @@
-package db;
+package ngen.db;
 
-import db.model.Link;
+import ngen.db.model.Link;
 import org.bson.Document;
 
 import java.util.ArrayList;

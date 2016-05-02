@@ -1,4 +1,4 @@
-package db.model;
+package ngen.db.model;
 
 import org.bson.Document;
 

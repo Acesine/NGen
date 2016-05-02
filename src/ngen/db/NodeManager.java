@@ -1,6 +1,6 @@
-package db;
+package ngen.db;
 
-import db.model.Node;
+import ngen.db.model.Node;
 import org.bson.Document;
 
 import java.util.List;

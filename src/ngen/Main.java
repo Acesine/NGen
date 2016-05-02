@@ -1,9 +1,11 @@
-import bots.SimpleBot;
+package ngen;
+
+import ngen.bots.SimpleBot;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
-import db.*;
-import db.model.Node;
+import ngen.db.*;
+import ngen.db.model.Node;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;

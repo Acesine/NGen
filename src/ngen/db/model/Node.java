@@ -1,4 +1,4 @@
-package db.model;
+package ngen.db.model;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
