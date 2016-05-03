@@ -9,8 +9,10 @@ import java.util.Objects;
  * Created by Acesine on 11/20/15.
  */
 public class Node {
-    public static String ID = "_id";
-    public static String WEIGHT = "weight";
+    private final static String SPLITTER = "|";
+
+    public final static String ID = "_id";
+    public final static String WEIGHT = "weight";
 
     private final String name;
     private final Double weight;
@@ -36,6 +38,16 @@ public class Node {
         return new Document()
                 .append(ID, name)
                 .append(WEIGHT, weight);
+    }
+
+    public static Node fromString(String str) {
+        String [] s = str.split(SPLITTER);
+        return new Node(s[0], new Double(s[1]));
+    }
+
+    @Override
+    public String toString() {
+        return name+SPLITTER+weight;
     }
 
     @Override

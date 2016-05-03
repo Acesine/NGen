@@ -5,22 +5,22 @@ import ngen.db.NodeManager;
 import ngen.db.model.Link;
 import ngen.db.model.Node;
 import ngen.exceptions.UriException;
+import ngen.structure.InfiniteConcurrentStringQueue;
 import org.bson.Document;
 import ngen.utils.UriUtils;
 import ngen.utils.handlers.HtmlHandler;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by xianggao on 5/1/16.
  */
 public class SimpleBot implements Runnable{
-    private final ConcurrentLinkedQueue<Node> queue;
+    private final InfiniteConcurrentStringQueue queue;
     private final LinkManager linkManager;
     private final NodeManager nodeManager;
 
-    public SimpleBot(final ConcurrentLinkedQueue<Node> queue,
+    public SimpleBot(final InfiniteConcurrentStringQueue queue,
                      final LinkManager linkManager,
                      final NodeManager nodeManager) {
         this.queue = queue;
@@ -30,22 +30,21 @@ public class SimpleBot implements Runnable{
 
     @Override
     public void run() {
-        final Node seed = queue.poll();
+        final String seed = queue.poll();
         if (seed != null) {
-            System.out.println("Working on: " + seed.getName());
+            System.out.println("Working on: " + seed);
             String html;
             try {
-                html = UriUtils.fetchUrl(seed.getName());
+                html = UriUtils.fetchUrl(seed);
             } catch (UriException e) {
-                System.out.println("Invalid uri: "+seed.getName());
+                System.out.println("Invalid uri: "+seed);
                 return;
             }
             List<String> allChildren = new HtmlHandler(html).fetchAllUris();
             for (String c : allChildren) {
-                Node newNode = Node.createNode(c, seed.getWeight() + 1);
-                if (!queue.contains(newNode) && !isChecked(c)) {
-                    linkManager.putLink(Link.createLink(seed.getName(), c));
-                    queue.add(newNode);
+                if (!queue.contains(c) && !isChecked(c)) {
+                    linkManager.putLink(Link.createLink(seed, c));
+                    queue.add(c);
                 }
             }
         }

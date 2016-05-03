@@ -5,12 +5,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 import ngen.db.*;
-import ngen.db.model.Node;
+import ngen.structure.InfiniteConcurrentStringQueue;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +19,7 @@ import java.util.concurrent.*;
 public class Main {
     private final static String SEED = "news.ycombinator.com/news";
     private final static int THREAD_NUM = 5;
-    private final static int TIME_OUT_IN_MINUTE = 1;
+    private final static int TIME_OUT_IN_MINUTE = 5*60;
 
     public static void main(String [] args) {
         MongoClient dbClient = new MongoClient("127.0.0.1", DBConstants.PORT);
@@ -51,6 +48,8 @@ public class Main {
         LinkManager linkManager = new LinkManagerImpl(dbManager);
         NodeManager nodeManager = new NodeManagerImpl(dbManager);
 
+        /*
+        // Redirect console output to file
         File outputFile = new File("out/out.txt");
         try {
             if (!outputFile.exists()) outputFile.createNewFile();
@@ -59,9 +58,10 @@ public class Main {
             System.out.println("Failed to create out.txt");
             return;
         }
+        */
 
-        final ConcurrentLinkedQueue<Node> queue = new ConcurrentLinkedQueue<Node>();
-        queue.add(Node.createNode(SEED, 0.0));
+        final InfiniteConcurrentStringQueue queue = new InfiniteConcurrentStringQueue();
+        queue.add(SEED);
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(THREAD_NUM);
         List<Future<?>> futures = new ArrayList<Future<?>>();
         Random rd = new Random();
@@ -77,7 +77,7 @@ public class Main {
             for (int i = 0; i < THREAD_NUM; i++) {
                 futures.get(i).cancel(true);
             }
-            e.printStackTrace();
         }
+        System.out.println("Finished.");
     }
 }
