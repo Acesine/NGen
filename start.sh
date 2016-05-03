@@ -12,7 +12,7 @@ elif [ `uname` == "Darwin" ]; then
 fi
 
 rm -f pids.txt
-rm -f $DB_DIR/mongod.lock
+sudo rm -f $DB_DIR/mongod.lock
 
 nohup $dbcmd > db.log 2>&1&
 echo $! >> pids.txt
