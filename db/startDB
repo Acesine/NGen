@@ -4,7 +4,7 @@ DB_PORT=5555
 
 if [ `uname` == "Linux" ]; then
     DB_DIR="/mnt/MYUSB/NGenDB/DATA"
-    /opt/mongo/bin/mongod --dbpath $DB_DIR --port $DB_PORT
+    sudo /opt/mongo/bin/mongod --dbpath $DB_DIR --port $DB_PORT
 elif [ `uname` == "Darwin" ]; then
     DB_DIR="/Volumes/MYUSB/NGenDB/DATA"
     ./mongod --dbpath $DB_DIR --port $DB_PORT
