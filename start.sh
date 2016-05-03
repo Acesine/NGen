@@ -11,8 +11,11 @@ elif [ `uname` == "Darwin" ]; then
     dbcmd="`pwd`/db/mongod --dbpath $DB_DIR --port $DB_PORT --fork --logpath `pwd`/mongodb.log"
 fi
 
-nohup $dbcmd &
+rm -f pids.txt
+nohup $dbcmd > db.log 2>&1&
+echo $! >> pids.txt
 
 sleep 10s
 
-nohup ant run &
+nohup ant run > app.log 2>&1&
+echo $! >> pids.txt
