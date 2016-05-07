@@ -42,15 +42,16 @@ public class SimpleBot implements Runnable{
             }
             List<String> allChildren = new HtmlHandler(html).fetchAllUris();
             for (String c : allChildren) {
-                if (!queue.contains(c) && !isChecked(c)) {
+                if (!queue.contains(c) && !isQueued(c)) {
                     linkManager.putLink(Link.createLink(seed, c));
+                    nodeManager.putNode(Node.createNode(c, 0.0));
                     queue.add(c);
                 }
             }
         }
     }
 
-    private boolean isChecked(String uri) {
+    private boolean isQueued(String uri) {
         return nodeManager.getNodeCount(new Document().append(Node.ID, uri)) != 0;
     }
 }
